@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lulz League</title>
-    <link rel="stylesheet" href="/style.css">
+    <title>Lulz Burgers and footmassages </title>
+    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/index.html">Lulz League</a>
+        <a class="navbar-brand" href="/index.html">Lulz Burgers and footmassage</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -18,9 +19,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                        </svg>
+                      <i class="bi bi-arrow-through-heart-fill"></i>
                     </a>
                 </li>
             </ul>
@@ -28,24 +27,43 @@
     </nav>
 </header>
     <main>
-    <div class="container px-4 py-5" id="featured-3">
-        <h2 class="pb-2 border-bottom">Lulz' Lineup </h2>
-        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div class="container px-4 py-5">
+        <h2 class="pb-2 border-bottom">Lulz' Burger Lineup </h2>
+        <p>Åh, spenningen med å velge den perfekte burgeren mens man får en fantastisk fotmassasje! Det er viktig å velge nøye, ellers kan det ende med et klissete mareritt.  Legg til dine favoritter i en super hemmlig liste. Tenk deg nøye om, ellers vil du ødelegge for deg selv. Det perfekte utvalget for en 100% fiktiv og realitetsfjern opplevelse.</p>
+        <div id="listContainer" class="container">
+          <!--Bare for display, html blir lagt til via script.js-->
           <div class="feature col">
             <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"></use></svg>
+                <img src="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-double-big-mac-BB-1:nutrition-calculator-tile?wid=472&hei=472&dpr=off" alt="juicy burger">
             </div>
-            <h3 class="fs-2 text-body-emphasis">Featured title</h3>
-            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+            <h3 class="fs-2 text-body-emphasis">Burger</h3>
+            <p> Lorem Ipsum is simply silly little dummy text</p>
             <a href="#" class="icon-link">
-              Call to action
-              <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+                Add to my favorites
             </a>
-          </div>
-          
         </div>
-        <div class="b-example-divider"></div>
+        <div class="feature col">
+          <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+              <img src="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-double-big-mac-BB-1:nutrition-calculator-tile?wid=472&hei=472&dpr=off" alt="juicy burger">
+          </div>
+          <h3 class="fs-2 text-body-emphasis">Burger</h3>
+          <p> Lorem Ipsum is simply silly little dummy text</p>
+          <a href="#" class="icon-link">
+              Add to my favorites
+          </a>
+      </div>
+      <div class="feature col">
+        <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            <img src="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-double-big-mac-BB-1:nutrition-calculator-tile?wid=472&hei=472&dpr=off" alt="juicy burger">
+        </div>
+        <h3 class="fs-2 text-body-emphasis">Burger</h3>
+        <p> Lorem Ipsum is simply silly little dummy text</p>
+        <a href="#" class="icon-link">
+            Add to my favorites
+        </a>
+    </div>
         
+        </div>
       </div>
     </main>
     <script src="/script.js"></script>
