@@ -3,3 +3,7 @@
     flex-wrap: wrap;
     justify-content: space-between; 
 }
+.feature {
+    min-width: 33%;
+    margin: 30px
+}
