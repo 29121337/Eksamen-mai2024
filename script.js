@@ -673,8 +673,8 @@ function generateHTMLList(burgers) {
                 <h3 class="fs-2 text-body-emphasis">${burger.name}</h3>
                 <p>${burger.price} $</p>
                 <a href="/details.html/${burger.id}" class="icon-link">
-                    See details
-                    <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+                    Se detaljer
+                    
                 </a>
             </div>`;
     });
@@ -686,11 +686,11 @@ generateHTMLList(burgers);
 
 document.addEventListener("DOMContentLoaded", function() {
     var urlParams = new URLSearchParams(window.location.search);
-    var productId = urlParams.get('id');
+    var burgerId = urlParams.get('id');
 
   /*
 async function showDetails () {
-    var url = `https://burgers-hub.p.rapidapi.com/burgers/{burgerId}?burgerId=${productId}`;
+    var url = `https://burgers-hub.p.rapidapi.com/burgers/${burgerId}`;
     var options = {
 	method: 'GET',
 	headers: {
@@ -702,7 +702,7 @@ async function showDetails () {
 
 try {
 	var response = await fetch(url, options);
-	var details = await response.text();
+	var details = await response.json();
 	generateHTMLDetails(details);
 } catch (error) {
 	console.error(error);
@@ -710,7 +710,17 @@ try {
 };
 */ 
 
-function generateHTMLDetails(burgers) {
-    var container = document.querySelector("#detailsContainer");
+    function generateHTMLDetails(burger) {
+        var container = document.querySelector("#detailsContainer");
+        var feature = `
+            <h2>${burger.name}</h2>
+            <img src="${burger.images[0].lg}" alt="juicy bilde av ${burger.name}">
+            <p>${burger.price} $</p>
+            <p>${burger.description}</p>
+            <a href="#" class="icon-link">
+            Legg til i favoritter
+          </a>
+        `;
+        container.innerHTML = feature;
+    };
 
-}
