@@ -1,5 +1,5 @@
 import { checkLoginStatus, logInUser, registerUser } from "../backend.js";
-checkLoginStatus();
+checkLoginStatus(null);
 let registerForm = document.getElementById("registerForm");
 let loginForm = document.getElementById("loginForm");
 
@@ -11,8 +11,13 @@ window.logUser = async function (event) {
   let password = event.target.querySelector(
     'input[placeholder="passord"]'
   ).value;
-  let user = await logInUser(username, password);
-  checkLoginStatus(user);
+  try {
+    let user = await logInUser(username, password);
+    console.log(user);
+    checkLoginStatus(user);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 window.regUser = function (event) {

@@ -37,7 +37,8 @@ async function getAllUsers() {
 
   try {
     let response = await fetch(url, options);
-    return response.json();
+    let data = await response.json();
+    return data.items;
   } catch (error) {
     alert(error);
   }
