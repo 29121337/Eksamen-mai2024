@@ -3,23 +3,23 @@
     flex-wrap: wrap;
     justify-content: space-between; 
 }
+
+#contentContainer,#loginContainer,#registerForm,#logoutButton {
+    display: none;
+}
+
+#secretList {
+    list-style-type: none;
+}
 .feature {
     min-width: 33%;
     margin: 30px
-}
-#page-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
 }
 .card {
     width: 100%;
     max-width: 600px;
 }
-#secretList {
-        list-style-type: none;
-}
+
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
@@ -52,7 +52,7 @@
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #4CAF50;
+  background: #212429;
   width: 100%;
   border: 0;
   padding: 15px;
@@ -63,7 +63,8 @@
   cursor: pointer;
 }
 .form button:hover,.form button:active,.form button:focus {
-  background: #43A047;
+  background: #313030;
+  color: #FFFFF;
 }
 .form .message {
   margin: 15px 0 0;
@@ -71,11 +72,8 @@
   font-size: 12px;
 }
 .form .message a {
-  color: #4CAF50;
+  color: #212429;
   text-decoration: none;
-}
-.form .register-form {
-  display: none;
 }
 .container {
   position: relative;

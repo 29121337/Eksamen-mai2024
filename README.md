@@ -25,8 +25,7 @@ lagring hensiktsmessig.
 _______________________________________
 
 Utfordringer
-1. Får ikke vist ikonet (<i class="bi bi-arrow-through-heart-fill"></i>) i index.html, selvom jeg har lagt inn bootstrap stylesheet. 
-2. Får ikke vist bilde fra APIet. (<img src="${burger.images[0].lg}" alt="juicy bilde av ${burger.name} "> i script.js)
+1. Funker å vise login når jeg definerer isLoggedIn = false, men når jeg bytter til true så vises ikke #contentContainer (backend.js, default styling er display:none)
 
 
 

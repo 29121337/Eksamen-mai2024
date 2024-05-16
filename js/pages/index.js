@@ -1,5 +1,5 @@
 import { getAllBurgers, getBurgerMainImageSrc } from "../burger-api.js";
-const burgersListContainer = document.querySelector("#burgersListContainer");
+let burgersListContainer = document.querySelector("#burgersListContainer");
 
 let burgers = await getAllBurgers();
 generateHTMLList(burgers);

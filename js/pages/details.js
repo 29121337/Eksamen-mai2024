@@ -1,21 +1,21 @@
 import { getBurger, getBurgerMainImageSrc } from "../burger-api.js";
-const burgerDetailsContainer = document.querySelector(
-	"#burgerDetailsContainer"
+let burgerDetailsContainer = document.querySelector(
+  "#burgerDetailsContainer"
 );
 
-const urlParams = new URLSearchParams(window.location.search);
-const burgerId = urlParams.get("burgerId");
+let urlParams = new URLSearchParams(window.location.search);
+let burgerId = urlParams.get("burgerId");
 
 let burger = await getBurger(burgerId);
 generateHTMLList(burger);
 
 function generateHTMLList(burger) {
-	let features = `
+  let features = `
             <div class="feature col">
                 <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
                 <img src="${getBurgerMainImageSrc(
-									burger
-								)}" alt="juicy bilde av ${burger.name} ">
+                  burger
+                )}" alt="juicy bilde av ${burger.name} ">
                 </div>
                 <h3 class="fs-2 text-body-emphasis">${burger.name}</h3>
                 <p>${burger.price}$</p>
@@ -26,5 +26,5 @@ function generateHTMLList(burger) {
                     Legg til i favoritter
                 </a>
             </div>`;
-	burgerDetailsContainer.innerHTML = features;
+  burgerDetailsContainer.innerHTML = features;
 }

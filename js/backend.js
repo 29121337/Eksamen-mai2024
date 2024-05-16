@@ -49,4 +49,30 @@ async function logInUser(username, password) {
   return rightUser;
 }
 
-// async function deleteUSer();
+async function deleteUser(userId){
+    let url = `${baseHref}users/${userId}`;
+    let options = {
+      method: "DELETE",
+      headers: {
+        Authorization: crudToken,
+        "Content-Type": "application/json",
+      }
+    };
+  
+    try {
+      let response = await fetch(url, options);
+      return response.json();
+    } catch (error) {
+      alert(error);
+    }
+};
+export async function checkLoginStatus() {
+   
+    if (isLoggedIn) {
+        document.getElementById('logincontainer').style.display = 'none';
+        document.getElementById('contentContainer').style.display = 'block';
+    } else {
+        document.getElementById('loginContainer').style.display = 'block';
+        document.getElementById('contentContainer').style.display = 'none';
+    }
+}

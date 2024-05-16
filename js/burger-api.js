@@ -1,6 +1,6 @@
-const RAPID_API_KEY = "5b9171c328msh511bcd1058acb2ap183af7jsncf4ecbf63195";
-const RAPID_API_HOST = "burgers-hub.p.rapidapi.com";
-const USE_BURGERS_API = false;
+let RAPID_API_KEY = "5b9171c328msh511bcd1058acb2ap183af7jsncf4ecbf63195";
+let RAPID_API_HOST = "burgers-hub.p.rapidapi.com";
+let USE_BURGERS_API = false;
 
 /**
  * API Doc: https://rapidapi.com/kaushiksheel9/api/burgers-hub/
@@ -647,7 +647,7 @@ export async function getAllBurgers() {
 	}
 
 	try {
-		var response = await fetch("https://" + RAPID_API_HOST + "/burgers", {
+		let response = await fetch("https://${RAPID_API_HOST}/burgers", {
 			method: "GET",
 			headers: {
 				"X-RapidAPI-Key": RAPID_API_KEY,
@@ -666,8 +666,8 @@ export async function getBurger(burgerId) {
 		return allBurgers.find((e) => e.id == burgerId);
 	}
 
-	var url = `https://burgers-hub.p.rapidapi.com/burgers/{burgerId}?burgerId=${burgerId}`;
-	var options = {
+	let url = `https://burgers-hub.p.rapidapi.com/burgers/{burgerId}?burgerId=${burgerId}`;
+	let options = {
 		method: "GET",
 		headers: {
 			"x-rapidapi-key": "1882b77d8bmsh35b1b7952afbfecp11a54fjsne89bd8f52616",
@@ -677,14 +677,14 @@ export async function getBurger(burgerId) {
 	};
 
 	try {
-		var response = await fetch(url, options);
+		let response = await fetch(url, options);
 		return response.json();
 	} catch (error) {
 		alert(error);
 	}
 }
 
-const IMAGE_SIZE_PRIORITIZATION = ["lg", "md", "sm"];
+let IMAGE_SIZE_PRIORITIZATION = ["lg", "md", "sm"];
 export function getBurgerMainImageSrc(burger) {
 	for (let imageSize of IMAGE_SIZE_PRIORITIZATION) {
 		if (burger.images[0][imageSize] != null) {
