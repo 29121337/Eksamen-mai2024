@@ -169,29 +169,15 @@ export async function getAllSecretlists() {
 }
 
 export async function addToSecretList(newFavorite) {
+    let url = `${baseHref}secretlist`;
     console.log(newFavorite);
     let loggedInUser = await getSessionData()._uuid;
-    let url = `${baseHref}secretlist`;
     let allSecretLists = await getAllSecretlists();
     let existingSecretList = allSecretLists.find(list => list.user_uuid === loggedInUser);
     if (existingSecretList) {
     existingSecretList.secretlist_ids.push(newFavorite);
     console.log(existingSecretList);
-    let favorites = {
-        method: "PUT",
-        headers: {
-          Authorization: crudToken,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(existingSecretList), 
-    };
-
-    try {
-        let response = await fetch(url, favorites);
-        return response.json();
-    } catch (error) {
-        alert(error);
-    } }
+   updateSecretList(existingSecretList)}
     else {
     let favorites = {
         method: "POST",
@@ -216,3 +202,5 @@ export async function addToSecretList(newFavorite) {
         alert(error);
       }
 }};
+
+async function updateSecretList () {};
