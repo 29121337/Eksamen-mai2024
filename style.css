@@ -19,6 +19,7 @@
     font-size: 20px!important;
     cursor:pointer!important;
 }
+
 .feature {
     min-width: 33%;
     margin: 30px
@@ -72,15 +73,22 @@
   background: #313030;
   color: #FFFFF;
 }
-.form .message {
+form .message {
   margin: 15px 0 0;
   color: #b3b3b3;
   font-size: 12px;
 }
-.form .message a {
-  color: #212429;
-  text-decoration: none;
+a.navbar-brand, .icon {
+    color: #FFFFFF !important;
 }
+ a {
+  color: #212429 !important;
+  text-decoration: none !important;
+}
+a:hover, .icon:hover {
+    color: #FFC72C !important;
+  }
+
 .container {
   position: relative;
   z-index: 1;

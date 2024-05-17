@@ -1,7 +1,7 @@
+import { getAllSecretlists, addToSecretList } from "../backend.js";
 import { getBurger, getBurgerMainImageSrc } from "../burger-api.js";
-let burgerDetailsContainer = document.querySelector(
-  "#burgerDetailsContainer"
-);
+
+let burgerDetailsContainer = document.querySelector("#burgerDetailsContainer");
 
 let urlParams = new URLSearchParams(window.location.search);
 let burgerId = urlParams.get("burgerId");
@@ -22,9 +22,16 @@ function generateHTMLList(burger) {
                 <p>
                 ${burger.desc}
 				</p>
-                <a href="#">
+                <div id="animationContainer" class="animation-target">
+                <a href="#" id="addFavorite">
                     Legg til i favoritter
                 </a>
+                </div>
             </div>`;
   burgerDetailsContainer.innerHTML = features;
+  let addFavoriteBtn = document.getElementById("addFavorite");
+  addFavoriteBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    addToSecretList(burger.id);
+  });
 }
