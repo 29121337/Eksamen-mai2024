@@ -6,6 +6,7 @@ import {
   getSessionData,
   clearSessionData,
   getAllSecretlists,
+  deleteListItem
 } from "../backend.js";
 import { getAllBurgers } from "../burger-api.js";
 
@@ -92,91 +93,40 @@ export async function generateSecretList(rightList) {
 }
 
 function generateHTMLSecretList(burgerList) {
-  let secretListContainer = document.querySelector("#secretList");
-  let features = "";
-  burgerList.forEach((burger) => {
-    features += `
-          <li>
-          <div class="row container d-flex">
-            <div class="col"><p>${burger.name}</p></div>
-            <div class="col">
-              <i class="bi bi-trash delete-button" data-burger-id="${burger.id}" id="${burger.id}"></i>
-            </div>
-          </div>
-        </li>`;
-  });
-  secretListContainer.innerHTML = features;
-  let deleteListItemBtn = document.getElementById(burger.id);
-  deleteListItemBtn.addEventListener("click", function (event) {
-    event.preventDefault();
-    let burgerId = event.target.dataset.burgerId;
-    deleteListItem(burgerId);
-  });
+	let secretListContainer = document.querySelector("#secretList");
+
+	burgerList.forEach((burger) => {
+		let listItem = document.createElement("li");
+
+		let rowDiv = document.createElement("div");
+		rowDiv.className = "row container d-flex";
+
+		let nameCol = document.createElement("div");
+		nameCol.className = "col";
+		let nameP = document.createElement("p");
+		nameP.textContent = burger.name;
+		nameCol.appendChild(nameP);
+
+		let deleteCol = document.createElement("div");
+		deleteCol.className = "col";
+		let deleteIcon = document.createElement("i");
+		deleteIcon.className = "bi bi-trash delete-button";
+		deleteIcon.id = burger.id;
+		deleteIcon.addEventListener("click", function (event) {
+			event.preventDefault();
+			deleteListItem(burger.id);
+		});
+    
+		deleteCol.appendChild(deleteIcon);
+
+		rowDiv.appendChild(nameCol);
+		rowDiv.appendChild(deleteCol);
+
+		listItem.appendChild(rowDiv);
+
+		secretListContainer.appendChild(listItem);
+	});
 }
 
-export async function addToSecretList(newFavorite) {
-  let loggedInUser = await getSessionData()._uuid;
-  let url = `${baseHref}secretlist`;
-  let allSecretLists = await getAllSecretlists();
-  let existingSecretList = allSecretLists.find(
-    (list) => list.user_uuid === loggedInUser
-  );
-  if (existingSecretList) {
-    existingSecretList.secretlist_ids.push(newFavorite);
 
-    updateSecretList(existingSecretList);
-    document.getElementById(newFavorite).innerHTML = `<p> Lagt til😋 </p> `;
-  } else {
-    let favorites = {
-      method: "POST",
-      headers: {
-        Authorization: crudToken,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify([
-        {
-          user_uuid: loggedInUser,
-          secretlist_ids: [newFavorite],
-        },
-      ]),
-    };
 
-    try {
-      let response = await fetch(url, favorites);
-      return response.json();
-    } catch (error) {
-      alert(error);
-    }
-  }
-}
-
-async function updateSecretList(updatedList) {
-  let url = `${baseHref}secretlist`;
-  let favorites = {
-    method: "PUT",
-    headers: {
-      Authorization: crudToken,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify([updatedList]),
-  };
-
-  try {
-    let response = await fetch(url, favorites);
-    return response.json();
-  } catch (error) {
-    alert(error);
-  }
-}
-async function deleteListItem(burgerId) {
-  let loggedInUser = await getSessionData()._uuid;
-  let url = `${baseHref}secretlist`;
-  let allSecretLists = await getAllSecretlists();
-  let existingSecretList = allSecretLists.find(
-    (list) => list.user_uuid === loggedInUser
-  );
-  if (existingSecretList) {
-    existingSecretList.secretlist_ids.delete(burgerId);
-    console.log(existingSecretList);
-  }
-}

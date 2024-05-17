@@ -1,4 +1,4 @@
-import { addToSecretList } from "./secretlist.js";
+import { addToSecretList } from "../backend.js";
 import { getBurger, getBurgerMainImageSrc } from "../burger-api.js";
 
 let burgerDetailsContainer = document.querySelector("#burgerDetailsContainer");
