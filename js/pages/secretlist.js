@@ -43,7 +43,6 @@ window.registerUser = function (event) {
     'input[placeholder="passord"]'
   ).value;
 
-  console.log(username, password);
   createUser(username, password);
   checkLoginStatus(username, password);
 };
@@ -67,9 +66,8 @@ window.logOutUser = function () {
 };
 export async function getSecretList(userId) {
   let allSecretLists = await getAllSecretlists();
-  let loggedInUser = await getSessionData()._uuid;
   let rightList = allSecretLists.find((list) => {
-    return list.user_uuid == loggedInUser;
+    return list.user_uuid == userId;
   });
 
   if (rightList !== undefined) {
@@ -94,7 +92,7 @@ export async function generateSecretList(rightList) {
 
 function generateHTMLSecretList(burgerList) {
 	let secretListContainer = document.querySelector("#secretList");
-
+  secretListContainer.innerHTML = "";
 	burgerList.forEach((burger) => {
 		let listItem = document.createElement("li");
 

@@ -59,8 +59,9 @@ export async function logInUser(username, password) {
   return rightUser || null;
 }
 
-async function deleteUser() {
-let loggedInUser = await getSessionData()._uuid;
+
+window.deleteUser = async function () {
+    let loggedInUser = getSessionData()._uuid;
   let url = `${baseHref}users/${loggedInUser}`;
   let user = {
     method: "DELETE",
@@ -78,7 +79,8 @@ let loggedInUser = await getSessionData()._uuid;
   };
 
   deleteSecretList(loggedInUser);
- 
+  clearSessionData();
+  checkLoginStatus(null);
 }
 
 async function deleteSecretList(loggedInUser) {
@@ -151,15 +153,19 @@ export async function getAllSecretlists() {
   }
 }
 export async function addToSecretList(newFavorite) {
-    let loggedInUser = await getSessionData()._uuid;
+    let loggedInUser =  getSessionData()._uuid;
+    if (loggedInUser !== undefined) {
     let url = `${baseHref}secretlist`;
     let allSecretLists = await getAllSecretlists();
     let existingSecretList = allSecretLists.find(
       (list) => list.user_uuid === loggedInUser
     );
-    if (!existingSecretList.secretlist_ids.includes(newFavorite)) {
-      existingSecretList.secretlist_ids.push(newFavorite);
-  
+
+
+    if (existingSecretList != null) {
+      if (!existingSecretList.secretlist_ids.includes(newFavorite)) {
+        existingSecretList.secretlist_ids.push(newFavorite);
+      }
       updateSecretList(existingSecretList);
       document.getElementById(newFavorite).innerHTML = `<p> Lagt til😋 </p> `;
     } else {
@@ -183,11 +189,14 @@ export async function addToSecretList(newFavorite) {
       } catch (error) {
         alert(error);
       }
+    }} else {
+        alert("Du må logge deg på for å kunne legge til favoritter. Sjekk hjertet øverst til høyre. 😋")
     }
   }
   
+ 
 export async function deleteListItem(burgerId) {
-    let loggedInUser = await getSessionData()._uuid;
+    let loggedInUser =  getSessionData()._uuid;
     let allSecretLists = await getAllSecretlists();
     let existingSecretList = allSecretLists.find(
       (list) => list.user_uuid === loggedInUser
@@ -195,6 +204,7 @@ export async function deleteListItem(burgerId) {
 
        existingSecretList.secretlist_ids = existingSecretList.secretlist_ids.filter(e => e != burgerId);
        console.log(existingSecretList);
+       await updateSecretList (existingSecretList);
        getSecretList(loggedInUser);
       
 }
