@@ -8,7 +8,7 @@
 #secretContentContainer {
     text-align: center;
 }
-#secretContentContainer,#loginContainer,#registerForm,#logoutButton {
+#secretContentContainer,#loginContainer,#registerForm,#logoutButton, #selfDestroyButton {
     display: none;
 }
 
@@ -71,8 +71,9 @@
 }
 .form button:hover,.form button:active,.form button:focus {
   background: #313030;
-  color: #FFFFF;
+  color: #FFFFFF;
 }
+
 form .message {
   margin: 15px 0 0;
   color: #b3b3b3;
@@ -82,7 +83,7 @@ a.navbar-brand, .icon {
     color: #FFFFFF !important;
 }
  a {
-  color: #212429 !important;
+  color: #686a6e !important;
   text-decoration: none !important;
 }
 a:hover, .icon:hover {

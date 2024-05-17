@@ -1,11 +1,10 @@
-import { getAllSecretlists, addToSecretList } from "../backend.js";
+import { addToSecretList } from "./secretlist.js";
 import { getBurger, getBurgerMainImageSrc } from "../burger-api.js";
 
 let burgerDetailsContainer = document.querySelector("#burgerDetailsContainer");
 
 let urlParams = new URLSearchParams(window.location.search);
 let burgerId = urlParams.get("burgerId");
-
 let burger = await getBurger(burgerId);
 generateHTMLList(burger);
 

@@ -1,53 +1,11 @@
-import { getAllBurgers } from "./burger-api.js";
+
+import {getSecretList, generateSecretList} from "./pages/secretlist.js"
 
 let crudToken = "Bearer 5sbTeBHD2DNZbeAOwXLeY3aBlXLSC68vnZr5m4asGnq7PxWBNA";
 let baseHref = "https://crudapi.co.uk/api/v1/";
 
 
-async function generateSecretList(rightList) {
-  let allBurgers = await getAllBurgers();
-  let burgerList = allBurgers.filter(burger => rightList.includes(burger.id));
-  console.log(burgerList);
-generateHTMLSecretList(burgerList);
-}
 
-function generateHTMLSecretList(burgerList) {
-    let secretListContainer = document.querySelector("#secretList");
-      let features = "";
-      burgerList.forEach((burger) => {
-          features += `
-          <li>
-          <div class="row container d-flex">
-            <div class="col"><p>${burger.name}</p></div>
-            <div class="col">
-              <i class="bi bi-trash" id="deleteButton"></i>
-            </div>
-          </div>
-        </li>`;
-      });
-      secretListContainer.innerHTML = features;
-  };
-  
-async function getSecretList(userId) {
-  let allSecretLists = await getAllSecretlists();
-  let loggedInUser = await getSessionData()._uuid;
-  let rightList = allSecretLists.find((list) => {
-    return list.user_uuid == loggedInUser;
-  });
-  
-  
-  if (rightList !== undefined) {
-    rightList = rightList.secretlist;
-    generateSecretList(rightList);
-  } else {
-    document.getElementById(
-      "userMessage"
-    ).innerText = `Ser ut som du ikke har valgt noen favoritter enda 😋 `;
-    document.getElementById(
-      "headerSecretList"
-    ).innerHTML = `<a href="/index.html" class="message"> Trykk her for å se vår burger lineup! </a> `;
-  }
-}
 
 export async function createUser(username, password) {
   let url = `${baseHref}users`;
@@ -123,11 +81,13 @@ export async function checkLoginStatus(user) {
   let loginContainer = document.getElementById("loginContainer");
   let contentContainer = document.getElementById("secretContentContainer");
   let logOutButton = document.getElementById("logoutButton");
+  let selfDestroyButton = document.getElementById("selfDestroyButton")
 
   if (user) {
     loginContainer.style.display = "none";
     contentContainer.style.display = "block";
     logOutButton.style.display = "block";
+    selfDestroyButton.style.display = "block";
     document.getElementById(
       "userMessage"
     ).innerText = `Velkommen, ${user.username}! 🍔  `;
@@ -166,64 +126,4 @@ export async function getAllSecretlists() {
   } catch (error) {
     alert(error);
   }
-}
-
-export async function addToSecretList(newFavorite) {
-    
-    let loggedInUser = await getSessionData()._uuid;
-    let url = `${baseHref}secretlist`;
-    let allSecretLists = await getAllSecretlists();
-    let existingSecretList = allSecretLists.find(list => list.user_uuid === loggedInUser);
-    if (existingSecretList) {
-    existingSecretList.secretlist_ids.push(newFavorite);
-   
-    updateSecretList(existingSecretList);
-    document.getElementById(
-        newFavorite
-      ).innerHTML = `<p> Lagt til😋 </p> `;
-
-    }
-    else {
-    let favorites = {
-        method: "POST",
-        headers: {
-          Authorization: crudToken,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify([
-            {
-              "user_uuid": loggedInUser,
-              "secretlist_ids": [ newFavorite
-              ]
-            }
-          ]),
-      };
-
-    
-      try {
-        let response = await fetch(url, favorites);
-        return response.json();
-      } catch (error) {
-        alert(error);
-      }
-}};
-
-async function updateSecretList(updatedList) {
-   
-    let url = `${baseHref}secretlist`;
-    let favorites = {
-        method: "PUT",
-        headers: {
-          Authorization: crudToken,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify([updatedList]), 
-    };
-
-    try {
-        let response = await fetch(url, favorites);
-        return response.json();
-    } catch (error) {
-        alert(error);
-    } 
 }
