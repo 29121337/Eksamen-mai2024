@@ -22,7 +22,7 @@ function generateHTMLList(burger) {
                 <p>
                 ${burger.desc}
 				</p>
-                <div id="animationContainer" class="animation-target">
+                <div id="${burger.id}">
                 <a href="#" id="addFavorite">
                     Legg til i favoritter
                 </a>

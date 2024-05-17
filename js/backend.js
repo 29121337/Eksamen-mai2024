@@ -130,7 +130,7 @@ export async function checkLoginStatus(user) {
     logOutButton.style.display = "block";
     document.getElementById(
       "userMessage"
-    ).innerText = `Welcome, ${user.username}! 🍔  `;
+    ).innerText = `Velkommen, ${user.username}! 🍔  `;
     getSecretList(user._uuid);
   } else {
     loginContainer.style.display = "block";
@@ -169,15 +169,20 @@ export async function getAllSecretlists() {
 }
 
 export async function addToSecretList(newFavorite) {
-    let url = `${baseHref}secretlist`;
-    console.log(newFavorite);
+    
     let loggedInUser = await getSessionData()._uuid;
+    let url = `${baseHref}secretlist`;
     let allSecretLists = await getAllSecretlists();
     let existingSecretList = allSecretLists.find(list => list.user_uuid === loggedInUser);
     if (existingSecretList) {
     existingSecretList.secretlist_ids.push(newFavorite);
-    console.log(existingSecretList);
-   updateSecretList(existingSecretList)}
+   
+    updateSecretList(existingSecretList);
+    document.getElementById(
+        newFavorite
+      ).innerHTML = `<p> Lagt til😋 </p> `;
+
+    }
     else {
     let favorites = {
         method: "POST",
@@ -203,4 +208,22 @@ export async function addToSecretList(newFavorite) {
       }
 }};
 
-async function updateSecretList () {};
+async function updateSecretList(updatedList) {
+   
+    let url = `${baseHref}secretlist`;
+    let favorites = {
+        method: "PUT",
+        headers: {
+          Authorization: crudToken,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify([updatedList]), 
+    };
+
+    try {
+        let response = await fetch(url, favorites);
+        return response.json();
+    } catch (error) {
+        alert(error);
+    } 
+}
