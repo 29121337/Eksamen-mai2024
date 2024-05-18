@@ -1,5 +1,7 @@
-import { addToSecretList } from "../backend.js";
+import { addToSecretList, getSessionData } from "../backend.js";
 import { getBurger, getBurgerMainImageSrc } from "../burger-api.js";
+
+let loggedInUser = getSessionData();
 
 let burgerDetailsContainer = document.querySelector("#burgerDetailsContainer");
 
@@ -9,12 +11,12 @@ let burger = await getBurger(burgerId);
 generateHTMLList(burger);
 
 function generateHTMLList(burger) {
-  let features = `
+	let features = `
             <div class="feature col">
                 <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
                 <img src="${getBurgerMainImageSrc(
-                  burger
-                )}" alt="juicy bilde av ${burger.name} ">
+									burger
+								)}" alt="juicy bilde av ${burger.name} ">
                 </div>
                 <h3 class="fs-2 text-body-emphasis">${burger.name}</h3>
                 <p>${burger.price}$</p>
@@ -27,10 +29,14 @@ function generateHTMLList(burger) {
                 </a>
                 </div>
             </div>`;
-  burgerDetailsContainer.innerHTML = features;
-  let addFavoriteBtn = document.getElementById("addFavorite");
-  addFavoriteBtn.addEventListener("click", function (event) {
-    event.preventDefault();
-    addToSecretList(burger.id);
-  });
+	burgerDetailsContainer.innerHTML = features;
+	let addFavoriteBtn = document.getElementById("addFavorite");
+	addFavoriteBtn.addEventListener("click", function (event) {
+		event.preventDefault();
+		if (loggedInUser == null) {
+			location.href = "/login.html?redirect=" + window.location.pathname + window.location.search;
+			return;
+		}
+		addToSecretList(burger.id);
+	});
 }

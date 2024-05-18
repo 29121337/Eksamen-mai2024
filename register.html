@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title></title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+		/>
+		<link rel="stylesheet" href="/style.css" />
+		<script type="module" defer src="js/pages/register.js"></script>
+	</head>
+	<body>
+		<header>
+			<nav
+				class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between"
+			>
+				<a class="navbar-brand" href="/index.html"
+					>Lulz Burgers and footmassage</a
+				>
+			</nav>
+		</header>
+		<main class="mt-4">
+			<div class="login-page">
+				<div class="form">
+					<h4>
+						Du må registrere deg for å få tilgang til din super hemmelige liste
+					</h4>
+					<form id="registerForm">
+						<input id="username" type="text" placeholder="brukernavn" />
+						<input id="password" type="password" placeholder="passord" />
+						<button>registrer meg</button>
+						<p class="message">
+							Allerede registrert?
+							<a
+								onclick="window.location='login.html' + window.location.search;"
+								>Logg inn</a
+							>
+						</p>
+					</form>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
